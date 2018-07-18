@@ -1,0 +1,85 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+
+    <button (click)="newUser()">NEW USER</button>
+    <button (click)="getAllUsers()">GET ALL USERS</button>
+    <button (click)="updateUser()">UPDATE USER</button>
+    <button (click)="getAllStates()">getAllStates</button>
+    <button (click)="addState()">addState</button>
+    <button (click)="addDist()">addDist</button>
+    <button (click)="getAllDists()">getAllDists</button>
+    <button (click)="addTown()">addTown</button>
+    <button (click)="getAllTowns()">getAllTowns</button>
+    <h4 *ngIf="getUsersList">{{getUsersList|json}}</h4>
+
+    <div (click)="getDistrictsBasedOnStateId('5b4d908da122a40d006d6f52')">STATES</div>
+    <div *ngIf="DistrictsBasedOnStateId">{{DistrictsBasedOnStateId|json}}</div>
+    <div (click)="getTownsBasedOnSD('5b4d908da122a40d006d6f52','5b4d90a0a122a40d006d6f53')">STATES</div>
+    <div *ngIf="getTownsBaseOnSD">{{getTownsBaseOnSD|json}}</div>
+
+    <br><br>
+    <div class="row ">
+        <div class="col-sm-6" align="center">
+
+            <div *ngIf="stateList">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="33%">ID</th>
+                            <th width="33%">State</th>
+                            <th width="33%">SET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let state of stateList">
+                            <td>{{state._id}}</td>
+                            <td>{{state.state_name}}</td>
+                            <td (click)="setLocalStorageValue(state)">SET</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="distList">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="33%">ID</th>
+                            <th width="33%">DIST</th>
+                            <th width="33%">SET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dist of distList">
+                            <td>{{dist._id}}</td>
+                            <td>{{dist.dist_name}}</td>
+                            <td (click)="setDistLocalStorageValue(dist)">SET</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-6" align="center">
+            <div *ngIf="townsData">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <!--<th width="25%">ID</th>-->
+                            <th width="25%">STATE</th>
+                            <th width="25%">DIST</th>
+                            <th width="25%">TOWN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let town of townsData">
+                            <!--<td>{{town._id}}</td>-->
+                            <td>{{town.state_id}}</td>
+                            <td>{{town.dist_id}}</td>
+                            <td>{{town.town_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

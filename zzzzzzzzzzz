@@ -1,0 +1,13 @@
+
+var userObj = {
+    name: 'ramu',
+    surname: 'vishwanatham  ',
+    gotram: 'chandhakula',
+    occupation: 'Employee',
+    mobile_number: 8096018362,
+    password: 'dfgdfgdf453',
+    father_name: 'Bhaskar',
+    state_id: 1,
+    dist_id: 1,
+    town_id: 1,
+}
