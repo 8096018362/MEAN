@@ -16,7 +16,7 @@ var APICONTROLLERS = {
         newUser.password = encrypt.encryptPassword(reqData.password);
         newUser.father_name = reqData.father_name;
         newUser.husband_name = reqData.husband_name;
-        newUser.status = false;
+        newUser.status = 'PENDING';
         newUser.profile.userRole = 'user';
         newUser.address.state_id = reqData.state_id;
         newUser.address.dist_id = reqData.dist_id;
@@ -29,20 +29,14 @@ var APICONTROLLERS = {
                 callback(null, 'error in database')
             }
             if (user) {
-                callback(null, { message: 'User already Added' })
+                callback(null, 'User already Added')
             } else {
-                newUser.save(function (err, newUser) {
+                newUser.save(function (err, User) {
                     if (err) {
-                        callback(null, 'error')
-                        return 'error';
+                        callback(null, 'error in sending obj')
                     } else {
-                        console.log('success')
-                        var obj = {
-                            status: 'success'
-                        }
-                        callback(obj, null)
+                        callback(User, null)
                     }
-
                 })
             }
         })
@@ -51,22 +45,28 @@ var APICONTROLLERS = {
 
 
     loginUser: (loginObj, callback) => {
-
         userModel.findOne({ mobile_number: loginObj.mobile_number }, function (err, user) {
             if (err) {
                 callback(null, 'error in database')
             } else if (!user) {
                 callback(null, 'User not Registed with this mobile Number')
             } else if (!encrypt.comparePwd(loginObj.password, user.password)) {
-                callback(null, 'PASSWORD ERROR')
+                callback(null, 'Please enter correct password')
             } else {
-
-                console.log('success')
-
                 callback(user, null)
             }
-
         });
+    },
+
+    userStatus: function (userObj, callback) {
+        userModel.findOne({ mobile_number: userObj.mobile_number }, function (err, user) {
+            if (err) {
+                callback(null, 'error in database')
+            }
+            if (user) {
+                callback(user, null)
+            }
+        })
     },
 
 
@@ -105,22 +105,3 @@ var APICONTROLLERS = {
 
 module.exports = APICONTROLLERS;
 
-
-// router.put('/updateStudent/:id', function (req, res, next) {
-//     var std = req.body;
-//     StudentModel.findById(std._id, function (err, studentData) {
-//         if (err) {
-//             res.send(sendError)
-//         } else {
-//             studentData.std_name = std.std_name;
-//             studentData.save(function (err, std) {
-//                 if (err) {
-//                     res.send(err)
-//                 } else {
-//                     response.message = 'update Successfully';
-//                     res.json(response)
-//                 }
-//             })
-//         }
-//     })
-// })

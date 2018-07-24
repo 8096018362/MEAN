@@ -13,7 +13,7 @@ var usersModel = function () {
         mobile_number: { type: Number },
         password: { type: String },
         Admin_Reject_Message: { type: String },
-        status: { type: Boolean },
+        status: { type: String },
         view_range: { type: String },
         device_key: { type: String },
         address:

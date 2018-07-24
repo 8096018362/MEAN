@@ -22,7 +22,11 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // Add headers
 app.use((req, res, next) => {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8100');
+    var allowedOrigins = ['http://localhost:4200', 'http://localhost:8100'];
+    var origin = req.headers.origin;
+    if (allowedOrigins.indexOf(origin) > -1) {
+        res.setHeader('Access-Control-Allow-Origin', origin);
+    }
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     // Request headers you wish to allow
@@ -31,11 +35,11 @@ app.use((req, res, next) => {
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', false);
     // Pass to next layer of middleware
-
     req.headers['if-none-match'] = 'no-match-for-this';
-
     next();
 });
+
+
 
 
 
@@ -51,6 +55,8 @@ app.set('port', port);
 
 app.post('/user-registration', auth.userRegister);
 app.post('/user-login', auth.userLogin);
+app.post('/user-status', auth.userStatus)
+
 app.get('/getAllUsers', auth.getAllUsers);
 app.put('/updateUser/:id', auth.updateUser);
 
