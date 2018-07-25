@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-
+    <button (click)="sendMail()">sendMail</button>
     <button (click)="newUser()">NEW USER</button>
     <button (click)="getAllUsers()">GET ALL USERS</button>
     <button (click)="updateUser()">UPDATE USER</button>
@@ -10,17 +10,10 @@
     <button (click)="getAllDists()">getAllDists</button>
     <button (click)="addTown()">addTown</button>
     <button (click)="getAllTowns()">getAllTowns</button>
-    <h4 *ngIf="getUsersList">{{getUsersList|json}}</h4>
 
-    <div (click)="getDistrictsBasedOnStateId('5b4d908da122a40d006d6f52')">STATES</div>
-    <div *ngIf="DistrictsBasedOnStateId">{{DistrictsBasedOnStateId|json}}</div>
-    <div (click)="getTownsBasedOnSD('5b4d908da122a40d006d6f52','5b4d90a0a122a40d006d6f53')">STATES</div>
-    <div *ngIf="getTownsBaseOnSD">{{getTownsBaseOnSD|json}}</div>
 
-    <br><br>
-    <div class="row ">
-        <div class="col-sm-6" align="center">
-
+    <div class="row">
+        <div class="col-sm-6">
             <div *ngIf="stateList">
                 <table class="table table-bordered">
                     <thead>
@@ -39,7 +32,8 @@
                     </tbody>
                 </table>
             </div>
-
+        </div>
+        <div class="col-sm-6">
             <div *ngIf="distList">
                 <table class="table table-bordered">
                     <thead>
@@ -59,7 +53,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-6" align="center">
+        <div class="col-sm-6">
             <div *ngIf="townsData">
                 <table class="table table-bordered">
                     <thead>
@@ -81,5 +75,32 @@
                 </table>
             </div>
         </div>
+        <div class="col-sm-6">
+            <div *ngIf="getUsersList">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="33%">status</th>
+                            <th width="33%">mobile</th>
+                            <th width="33%">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of getUsersList">
+                            <td>{{user.status}}</td>
+                            <td>{{user.mobile_number}}</td>
+                            <td (click)="userVerified(user)" *ngIf="user.status=='PENDING'">Activate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="col-sm-6">
+
+        </div>
+
+
     </div>
+
 </div>

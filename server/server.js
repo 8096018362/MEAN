@@ -3,6 +3,16 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var http = require('http');
 var app = express();
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'vishwanathamramu@gmail.com',
+        pass: 9866152401
+    }
+});
+
 
 /**dB Connection */
 var dBconnection = require('./_db/db_connection');
@@ -55,7 +65,8 @@ app.set('port', port);
 
 app.post('/user-registration', auth.userRegister);
 app.post('/user-login', auth.userLogin);
-app.post('/user-status', auth.userStatus)
+app.post('/user-status', auth.userStatus);
+app.post('/userVerified', auth.userVerified)
 
 app.get('/getAllUsers', auth.getAllUsers);
 app.put('/updateUser/:id', auth.updateUser);
@@ -69,6 +80,8 @@ app.get('/getAllDists', region.getAllDists)
 
 app.post('/addTown', region.addTown)
 app.get('/getAllTowns', region.getAllTowns)
+
+
 
 
 var server = http.createServer(app);

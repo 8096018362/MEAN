@@ -23,7 +23,9 @@
     "bcrypt": "^3.0.0",
     "core-js": "^2.5.4",
     "mongoose": "^5.2.2",
+    "nodemailer": "^4.6.7",
     "rxjs": "^6.2.1",
+    "twilio": "^3.18.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

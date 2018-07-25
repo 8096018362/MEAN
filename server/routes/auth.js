@@ -13,9 +13,9 @@ var errorResponse = {
 
 var AUTH = {
 
-    userRegister: function(req, res) {
+    userRegister: function (req, res) {
         var reqBody = req.body;
-        apiController.userRegistration(reqBody, function(CtrlRes, err) {
+        apiController.userRegistration(reqBody, function (CtrlRes, err) {
             if (err) {
                 errorResponse.message = err;
                 return res.json(errorResponse);
@@ -27,9 +27,9 @@ var AUTH = {
         })
     },
 
-    userLogin: function(req, res) {
+    userLogin: function (req, res) {
         var reqBody = req.body;
-        apiController.loginUser(reqBody, function(CtrlRes, err) {
+        apiController.loginUser(reqBody, function (CtrlRes, err) {
             if (err) {
                 errorResponse.message = err;
                 return res.json(errorResponse);
@@ -41,9 +41,9 @@ var AUTH = {
         })
     },
 
-    userStatus: function(req, res) {
+    userStatus: function (req, res) {
         var reqBody = req.body;
-        apiController.userStatus(reqBody, function(CtrlRes, err) {
+        apiController.userStatus(reqBody, function (CtrlRes, err) {
             if (err) {
                 errorResponse.message = err;
                 return res.json(errorResponse);
@@ -55,8 +55,22 @@ var AUTH = {
         })
     },
 
-    getAllUsers: function(req, res) {
-        apiController.getAllUsers(req, function(CtrlRes, err) {
+    userVerified: function (req, res) {
+        var reqBody = req.body;
+        apiController.userVerified(reqBody, function (CtrlRes, err) {
+            if (err) {
+                errorResponse.message = err;
+                return res.json(errorResponse);
+            } else {
+                response.message = "User Details" + CtrlRes.status;
+                response.data = CtrlRes;
+                return res.json(response);
+            }
+        })
+    },
+
+    getAllUsers: function (req, res) {
+        apiController.getAllUsers(req, function (CtrlRes, err) {
             if (err) {
                 errorResponse.message = err;
                 return res.json(errorResponse);
@@ -68,9 +82,9 @@ var AUTH = {
         })
     },
 
-    updateUser: function(req, res) {
+    updateUser: function (req, res) {
         var reqBody = req.body;
-        apiController.updateUser(reqBody, function(CtrlRes, err) {
+        apiController.updateUser(reqBody, function (CtrlRes, err) {
             if (err) {
                 errorResponse.message = err;
                 return res.json(errorResponse);

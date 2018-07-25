@@ -15,6 +15,7 @@ export class AppComponent {
         this.getAllStates();
         this.getAllDists();
         this.getAllTowns();
+        this.getAllUsers();
     }
     newUser() {
         let userObj = {
@@ -38,7 +39,7 @@ export class AppComponent {
     public getUsersList: any;
     getAllUsers() {
         this._appService.genericGetMethod(this.commonUrl + 'getAllUsers').subscribe((data) => {
-            this.getUsersList = data;
+            this.getUsersList = data.data;
         })
     }
 
@@ -136,5 +137,16 @@ export class AppComponent {
         }
     }
 
+    sendMail() {
+        this._appService.genericPostMethod(this.commonUrl + 'sendMail', { number: 8096018362 }).subscribe((data) => {
+            console.log(JSON.stringify(data))
+        })
+    }
+
+    userVerified(obj) {
+        this._appService.genericPostMethod(this.commonUrl + 'userVerified', { mobile_number: obj.mobile_number }).subscribe((data) => {
+            console.log(JSON.stringify(data))
+        })
+    }
 
 }

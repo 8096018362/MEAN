@@ -68,6 +68,23 @@ var APICONTROLLERS = {
             }
         })
     },
+    userVerified: function (userObj, callback) {
+        userModel.findOne({ mobile_number: userObj.mobile_number }, function (err, userData) {
+            if (err) {
+                callback(null, 'error in database')
+            } else {
+                userData.userId = "VYSYA100OJILP";
+                userData.status = "ACTIVE";
+                userData.save(function (err, user) {
+                    if (err) {
+                        callback(null, 'error in sending obj')
+                    } else {
+                        callback(user, null)
+                    }
+                })
+            }
+        })
+    },
 
 
     getAllUsers: function (res, callback) {
